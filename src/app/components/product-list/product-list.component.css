@@ -9,23 +9,17 @@
   }
 
   .product-list .card {
-    width: 300px;
-    margin-bottom: 20px;
+    width: 250px;
+    margin-top: 20px;
   }
 
   .select {
     margin-right: 20px;
   }
 
-  /* Add necessary styles for the product cards */
-  .product-list .card {
-    margin-bottom: 20px;
-  }
-
   .card {
-    margin-top: 20px;
     width: 100%;
-    height: 100%;
+    height: 95%;
   }
 
   .card-img-top {
