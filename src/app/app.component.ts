@@ -9,9 +9,7 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'ECommerceClient';
 
-  constructor(private router: Router) { }
+  constructor( ) { }
   
-  goMyCart(){
-    this.router.navigate(['/cart']);
-  }
+
 }
