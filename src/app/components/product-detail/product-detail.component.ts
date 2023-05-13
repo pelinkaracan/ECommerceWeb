@@ -34,7 +34,6 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addToCart(){
-    debugger;
     const cartItems = this.cartService.getCartItems();
     const items = cartItems.filter(e => e.product.id === this.product.id);
     if(items.length > 0)

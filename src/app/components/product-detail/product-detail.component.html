@@ -4,12 +4,13 @@
   </button>
 
   <div class="d-flex flex-nowrap">
-    <img src="{{'data:image/jpg;base64,' + product.image}}" class="img-fluid custom-image">
-    <div>
-      <h5 class="card-title">{{product.name}}</h5>
+    <img src="{{product.image}}" class="img-fluid custom-image">
+    <div class="align-self-center">
+      <h3 class="card-title">{{product.name}}</h3>
+      <br>
       <p class="card-title">{{product.summary}}</p>
       <div class="d-flex justify-content-start">
-        <button type="button" class="cart-button btn btn-outline-secondary" (click)="addToCart()"> 
+        <button type="button" class="cart-button btn btn-outline-dark" (click)="addToCart()"> 
          {{cartButtonText}} </button>
       </div>
     </div>

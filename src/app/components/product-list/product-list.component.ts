@@ -20,12 +20,12 @@ export class ProductListComponent implements OnInit {
   filter: string = "";
 
   productsPerRow = 2;
-  endPoint :string = '';
+  endPoint: string = '';
   currencySymbol: string;
 
-  constructor(private router: Router, private http: HttpClient, private configService: ConfigService) { 
-    this.endPoint =  this.configService.endPoint;
-    this.currencySymbol =  this.configService.getCurrencySymbol();
+  constructor(private router: Router, private http: HttpClient, private configService: ConfigService) {
+    this.endPoint = this.configService.endPoint;
+    this.currencySymbol = this.configService.getCurrencySymbol();
   }
 
   ngOnInit() {
@@ -41,15 +41,24 @@ export class ProductListComponent implements OnInit {
     debugger;
     // let urlX = this.configService.getConfig();
     let url = `${this.endPoint}/products?page=${this.currentPage}&pageSize=${this.pageSize}`;
-    if(this.filter !==''){
-       url = `${this.endPoint}/products?page=${this.currentPage}&pageSize=${this.pageSize}&filter=${this.filter}`;
+    if (this.filter !== '') {
+      url = `${this.endPoint}/products?page=${this.currentPage}&pageSize=${this.pageSize}&filter=${this.filter}`;
     }
-  
     this.http.get<any>(url).subscribe(response => {
+      debugger;
       this.products = response.items;
+      this.products.forEach((product) => {
+        let imageUrl = `${this.endPoint}/products/${product.id}/image`;
+        this.http.get(imageUrl, { responseType: 'arraybuffer' })
+          .subscribe(data => {
+            const imageBlob = new Blob([data], { type: 'image/jpeg' });
+            product.image = URL.createObjectURL(imageBlob);
+          });
+      });
       this.totalPages = response.totalPages;
     });
   }
+
 
   pageChanged(event: any): void {
     this.currentPage = event.page;
@@ -63,22 +72,21 @@ export class ProductListComponent implements OnInit {
     }
   }
 
-  setProductPerRowValue(productsPerRowValue:number) : void{
+  setProductPerRowValue(productsPerRowValue: number): void {
     this.productsPerRow = productsPerRowValue;
   }
 
   redirectToProduct(product: Product): void {
     const queryParams = { product: JSON.stringify(product) }
-    this.router.navigate(['/productDetail',  queryParams]);
+    this.router.navigate(['/productDetail', queryParams]);
   }
 
-  searchProduct(){
-    debugger;
+  searchProduct() {
     this.currentPage = 1;
-    if(this.searchKeyword?.nativeElement.value !== ''){
+    if (this.searchKeyword?.nativeElement.value !== '') {
       this.filter = `name contains ${this.searchKeyword?.nativeElement.value}`;
     }
-    else{
+    else {
       this.filter = '';
     }
     this.getData();

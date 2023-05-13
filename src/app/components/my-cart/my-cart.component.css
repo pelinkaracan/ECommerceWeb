@@ -12,13 +12,10 @@ input::-webkit-inner-spin-button {
 
 .card {
   width: 100%;
-  height: 95%;
+  height: 100%;
+  margin-top: 20px;
 }
 
-.card-img-top {
-  object-fit: cover;
-  height: 300px; /* Adjust the height based on your needs */
-}
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;

@@ -58,7 +58,6 @@ export class MyCartComponent implements OnInit {
     }
     this.http.post(url, data, { headers }).subscribe(
       response => {
-        debugger;
         const result :any  = response;
         const modalRef = this.modalService.open(MessageModalComponent);
         modalRef.componentInstance.title = 'My Message';
@@ -90,7 +89,6 @@ export class MyCartComponent implements OnInit {
       modalRef.componentInstance.message = `Do you want this product:${item.product.name} from your cart`;
       modalRef.componentInstance.isOrder = false;
       modalRef.result.then((result) => {
-        debugger;
         // Handle the modal result
         if (result === 'OK') {
           this.cartService.removeFromCart(item);

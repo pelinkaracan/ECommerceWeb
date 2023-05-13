@@ -29,7 +29,7 @@
         <div class="col-{{12 / productsPerRow}}" *ngFor="let product of products" >
           <div class="card">
               <div class="card-body" (click)="redirectToProduct(product)">
-                <img src="{{'data:image/jpg;base64,' + product.image}}" class="card-img-top">
+                <img src="{{product.image}}" class="img-fluid custom-image">
                 <h5 class="card-title">{{ product.name }}</h5>
                 <p class="card-text">Price:{{currencySymbol}}{{ product.price }}</p>
               </div>
