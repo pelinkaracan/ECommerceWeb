@@ -4,8 +4,9 @@
   </button>
   <div class="card">
     <div class="card-body">
-      <img src="{{'data:image/jpg;base64,' + product.image}}" class="object-fit-sm-contain border rounded" >
+      <img src="{{'data:image/jpg;base64,' + product.image}}" class="card-img-top" >
       <h5 class="card-title">{{product.name}}</h5>
+      <p class="card-title">{{product.summary}}</p>
       <p class="card-text">{{currencySymbol}}{{product.price}}</p>
     </div>
   </div>

@@ -10,6 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { CartService } from '../services/cart.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AppRoutingModule } from '../app-routing.module';
+import { HomePageComponent } from './home-page/home-page.component';
 
 
 @NgModule({
@@ -17,14 +19,19 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ProductListComponent,
     ProductDetailComponent,
     LoginPageComponent,
-    MyCartComponent
+    MyCartComponent,
+    HomePageComponent
    ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     FormsModule,
     HttpClientModule,
     PaginationModule.forRoot(),
     NgbModule
+  ],
+  exports:[
+    HomePageComponent
   ],
   providers: [CartService]
 })

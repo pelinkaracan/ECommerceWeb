@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ComponentModule } from './components/component.module';
 import { CartService } from './services/cart.service';
+import { HomePageComponent } from './components/home-page/home-page.component';
 
 
 @NgModule({
@@ -21,7 +22,6 @@ import { CartService } from './services/cart.service';
     HttpClientModule,
     PaginationModule.forRoot(),
     ComponentModule
-    
   ],
   providers: [CartService],
   bootstrap: [AppComponent]

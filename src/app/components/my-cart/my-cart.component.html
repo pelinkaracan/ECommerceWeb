@@ -17,7 +17,7 @@
               <div class="input-group-prepend">
                 <button class="btn btn-outline-secondary btn-sm" type="button" (click)="decrement(item)">-</button>
               </div>
-              <input type="number"  class="visually-hidden" min="1" disabled="false" [(ngModel)]="item.quantity">
+              <input type="number"  class="visually-hidden" min="0" disabled="false" [(ngModel)]="item.quantity">
               <div class="input-group-append">
                 <button class="btn btn-outline-secondary btn-sm" type="button" (click)="increment(item)">+</button>
               </div>

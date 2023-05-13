@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -10,11 +10,13 @@ export class MessageModalComponent implements OnInit {
 
   @Input() title: string = '';
   @Input() message: string = '';
+  @Input() isOrder: boolean = true;
 
   constructor(public activeModal: NgbActiveModal) { }
 
   ngOnInit() {
   }
+
 
 
 }

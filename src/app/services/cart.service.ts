@@ -21,4 +21,8 @@ constructor() { }
     const index = this.cartItems.indexOf(cartItem);
     this.cartItems.splice(index, 1);
   }
+
+  emptyCart(){
+    this.cartItems = [];
+  }
 }

@@ -68,6 +68,7 @@ export class ProductListComponent implements OnInit {
 
   searchProduct(){
     debugger;
+    this.currentPage = 1;
     if(this.searchKeyword?.nativeElement.value !== ''){
       this.filter = `name contains ${this.searchKeyword?.nativeElement.value}`;
     }

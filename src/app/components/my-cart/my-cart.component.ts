@@ -57,10 +57,12 @@ export class MyCartComponent implements OnInit {
         const modalRef = this.modalService.open(MessageModalComponent);
         modalRef.componentInstance.title = 'My Message';
         modalRef.componentInstance.message = `Your Order :${result.id.substring(0, 10)} is created successfully.`;
+        modalRef.componentInstance.isOrder = true;
         modalRef.result.then((result) => {
           // Handle the modal result
           if (result === 'OK') {
             this.router.navigate(['']);
+            this.cartService.emptyCart();
           }
         }).catch((error) => {
           // Handle any error that occurs
@@ -75,9 +77,26 @@ export class MyCartComponent implements OnInit {
 
   decrement(item: CartItem) {
     item.quantity--;
-    if(item.quantity ===0)
+    if(item.quantity === 0)
     {
-      this.cartService.removeFromCart(item);
+      const modalRef = this.modalService.open(MessageModalComponent);
+      modalRef.componentInstance.title = 'My Message';
+      modalRef.componentInstance.message = `Do you want this product:${item.product.name} from your cart`;
+      modalRef.componentInstance.isOrder = false;
+      modalRef.result.then((result) => {
+        debugger;
+        // Handle the modal result
+        if (result === 'OK') {
+          this.cartService.removeFromCart(item);
+        }
+        else if (result === 'CANCEL') {
+          item.quantity++;
+        }
+      }).catch((error) => {
+        // Handle any error that occurs
+        console.log(error);
+      });
+      
     }
     this.calculateTotalValues();
   }
