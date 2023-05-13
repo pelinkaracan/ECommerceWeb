@@ -4,6 +4,7 @@ import { Location, getCurrencySymbol, getLocaleCurrencyCode } from '@angular/com
 import { Product } from 'src/app/entities/Product';
 import { CartService } from 'src/app/services/cart.service';
 import { CartItem } from 'src/app/entities/CartItem';
+import { ConfigService } from 'src/app/services/config.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -17,14 +18,13 @@ export class ProductDetailComponent implements OnInit {
   cartButtonText = "";
 
   constructor(private route: ActivatedRoute, private location: Location, private cartService: CartService,
-    private router: Router) { }
+    private router: Router, private configService: ConfigService) {
+      this.currencySymbol =  this.configService.getCurrencySymbol();
+     }
 
   ngOnInit() {
     const queryParams=this.route.snapshot.paramMap.get('product') ?? '';
     this.product = JSON.parse(queryParams);
-    const userLocale = navigator.language;
-    const currencyCode = getLocaleCurrencyCode(userLocale) ?? '';
-    this.currencySymbol = getCurrencySymbol(currencyCode,'narrow', userLocale);
     this.cartButtonText =`${this.currencySymbol} ${this.product.price} Add To Cart `
    
   }

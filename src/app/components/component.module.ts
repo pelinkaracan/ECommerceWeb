@@ -12,6 +12,7 @@ import { CartService } from '../services/cart.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from '../app-routing.module';
 import { HomePageComponent } from './home-page/home-page.component';
+import { ConfigService } from '../services/config.service';
 
 
 @NgModule({
@@ -33,6 +34,6 @@ import { HomePageComponent } from './home-page/home-page.component';
   exports:[
     HomePageComponent
   ],
-  providers: [CartService]
+  providers: [CartService,ConfigService]
 })
 export class ComponentModule { }

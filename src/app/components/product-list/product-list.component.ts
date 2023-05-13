@@ -1,9 +1,8 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { Product } from 'src/app/entities/Product';
-import { DomSanitizer } from '@angular/platform-browser';
+import { ConfigService } from 'src/app/services/config.service';
 
 @Component({
   selector: 'app-product-list',
@@ -21,8 +20,13 @@ export class ProductListComponent implements OnInit {
   filter: string = "";
 
   productsPerRow = 2;
+  endPoint :string = '';
+  currencySymbol: string;
 
-  constructor(private router: Router, private http: HttpClient, private _sanitizer: DomSanitizer) { }
+  constructor(private router: Router, private http: HttpClient, private configService: ConfigService) { 
+    this.endPoint =  this.configService.endPoint;
+    this.currencySymbol =  this.configService.getCurrencySymbol();
+  }
 
   ngOnInit() {
     this.getData();
@@ -34,9 +38,11 @@ export class ProductListComponent implements OnInit {
   }
 
   getData() {
-    let url = `https://localhost:7060/api/products?page=${this.currentPage}&pageSize=${this.pageSize}`;
+    debugger;
+    // let urlX = this.configService.getConfig();
+    let url = `${this.endPoint}/products?page=${this.currentPage}&pageSize=${this.pageSize}`;
     if(this.filter !==''){
-       url = `https://localhost:7060/api/products?page=${this.currentPage}&pageSize=${this.pageSize}&filter=${this.filter}`;
+       url = `${this.endPoint}/products?page=${this.currentPage}&pageSize=${this.pageSize}&filter=${this.filter}`;
     }
   
     this.http.get<any>(url).subscribe(response => {

@@ -10,7 +10,7 @@
         <div class="card-body">
           <h5 class="card-title">{{ item.product.name }}</h5>
           <p class="card-text">{{ item.product.summary }}</p>
-          <p class="card-text">Price: ${{ item.product.price }}</p>
+          <p class="card-text">Price: {{currencySymbol}}{{ item.product.price }}</p>
           
           <div class="input-group mb-3"> <span></span>
             <p class="number-input card-text">Quantity: {{ item.quantity }} </p>
@@ -33,15 +33,15 @@
           <h5 class="card-title">Cart Summary</h5>
           <div class="d-flex">
             <div class="p-2 flex-grow-1">Total price</div>
-            <div class="p-2">${{ totalValues.totalPrice }}</div>
+            <div class="p-2">{{currencySymbol}}{{ totalValues.totalPrice }}</div>
           </div>
           <div class="d-flex">
             <div class="p-2 flex-grow-1">Total tax(%18)</div>
-            <div class="p-2">${{ totalValues.totalTax }}</div>
+            <div class="p-2">{{currencySymbol}}{{ totalValues.totalTax }}</div>
           </div>
           <div class="d-flex">
               <div class="p-2 flex-grow-1">Total Price with tax</div>
-              <div class="p-2">${{ totalValues.totalPriceWithTax }}</div>
+              <div class="p-2">{{currencySymbol}}{{ totalValues.totalPriceWithTax }}</div>
           </div>
         
         </div>

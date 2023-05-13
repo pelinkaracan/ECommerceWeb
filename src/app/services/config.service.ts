@@ -1,13 +1,22 @@
+import { getCurrencySymbol, getLocaleCurrencyCode } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
-@Injectable()
+@Injectable({
+  providedIn :"any"
+})
 export class ConfigService {
-  constructor(private http: HttpClient) { }
 
-  configUrl = 'assets/config.json';
+  endPoint :string ='';
+  constructor() { }
 
-  getConfig() {
-    return this.http.get<string>(this.configUrl);
+  ngOnInit(){
+   
   }
+
+  getCurrencySymbol()  {
+    const userLocale = navigator.language;
+    const currencyCode = getLocaleCurrencyCode(userLocale) ?? '';
+    return getCurrencySymbol(currencyCode,'narrow', userLocale);
+  }
+
 }

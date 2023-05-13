@@ -10,6 +10,15 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+.card {
+  width: 100%;
+  height: 95%;
+}
+
+.card-img-top {
+  object-fit: cover;
+  height: 300px; /* Adjust the height based on your needs */
+}
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;

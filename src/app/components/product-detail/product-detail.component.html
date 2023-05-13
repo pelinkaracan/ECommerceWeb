@@ -2,16 +2,16 @@
   <button type="button" class="back-button btn btn-outline-secondary" (click)="goBack()"> 
     <i class="bi bi-arrow-left"></i>
   </button>
-  <div class="card">
-    <div class="card-body">
-      <img src="{{'data:image/jpg;base64,' + product.image}}" class="card-img-top" >
+
+  <div class="d-flex flex-nowrap">
+    <img src="{{'data:image/jpg;base64,' + product.image}}" class="img-fluid custom-image">
+    <div>
       <h5 class="card-title">{{product.name}}</h5>
       <p class="card-title">{{product.summary}}</p>
-      <p class="card-text">{{currencySymbol}}{{product.price}}</p>
+      <div class="d-flex justify-content-start">
+        <button type="button" class="cart-button btn btn-outline-secondary" (click)="addToCart()"> 
+         {{cartButtonText}} </button>
+      </div>
     </div>
-  </div>
-  <div class="d-flex justify-content-end">
-    <button type="button" class="cart-button btn btn-outline-secondary" (click)="addToCart()"> 
-     {{cartButtonText}} </button>
   </div>
 </div>

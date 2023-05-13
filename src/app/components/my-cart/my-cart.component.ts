@@ -7,6 +7,7 @@ import { CartItem } from 'src/app/entities/CartItem';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MessageModalComponent } from '../message-modal/message-modal.component';
 import { Router } from '@angular/router';
+import { ConfigService } from 'src/app/services/config.service';
 
 @Component({
   selector: 'app-my-cart',
@@ -17,8 +18,13 @@ export class MyCartComponent implements OnInit {
 
   cartItems: CartItem[] = [];
   totalValues: any = { totalPrice: 0, totalTax: 0, totalPriceWithTax: 0 };
+  endPoint: string ='';
+  currencySymbol: string;
   constructor(private location: Location, private cartService: CartService, private http: HttpClient,
-    private modalService: NgbModal, private router: Router) { }
+    private modalService: NgbModal, private router: Router, private configService: ConfigService) { 
+      this.endPoint =  this.configService.endPoint;
+      this.currencySymbol =  this.configService.getCurrencySymbol();
+    }
 
   ngOnInit() {
     this.cartItems = this.cartService.getCartItems();
@@ -40,7 +46,7 @@ export class MyCartComponent implements OnInit {
   }
 
   createOrder() {
-    const url = `https://localhost:7060/api /order`;
+    const url = `${this.endPoint}/order`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const data: Order = new Order();
     data.userId = '645a23178d0a14499d404d91';
