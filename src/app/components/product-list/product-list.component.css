@@ -1,0 +1,30 @@
+
+
+.search-bar {
+    margin-bottom: 20px;
+  }
+
+  .product-list {
+    margin-bottom: 20px;
+  }
+
+  .product-list .card {
+    width: 300px;
+    margin-bottom: 20px;
+  }
+
+  .select {
+    margin-right: 20px;
+  }
+
+  /* Add necessary styles for the product cards */
+  .product-list .card {
+    margin-bottom: 20px;
+  }
+  
+  /* Adjust the product card width based on the number of products per row */
+  @media (min-width: 768px) {
+    .product-list .card {
+      width: calc(100% / {{ productsPerRow }});
+    }
+  }

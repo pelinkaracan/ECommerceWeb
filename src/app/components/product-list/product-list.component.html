@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="search-bar">
+    <form class="form-inline">
+      <div class="input-group">
+          <input class="form-control" type="search" placeholder="Search" aria-label="Search" #searchKeyword>
+          <div class="input-group-append">
+            <button type="button" class="btn btn-outline-primary" (click)="searchProduct()">Search</button>
+          </div>
+        </div>
+    </form>
+  </div>
+
+  <!-- Number of products per row option -->
+  <div class="d-flex justify-content-end">
+      <div class="col-auto ml-auto">
+          <div class="btn-group" role="group" aria-label="Basic outlined example">
+              <button type="button" class="btn btn-outline-primary" (click)="setProductPerRowValue(2)"> 
+                  <span class="bi bi-layout-split"></span>
+              </button>
+              <button type="button" class="btn btn-outline-primary" (click)="setProductPerRowValue(4)">
+                  <span class="bi bi-grid"></span>
+              </button>
+          </div>
+      </div>
+  </div>
+
+  <div class="product-list">
+      <div class="row">
+        <div class="col-{{12 / productsPerRow}}" *ngFor="let product of products" >
+          <div class="card">
+              <div class="card-body" (click)="redirectToProduct(product)">
+                <img src="{{'data:image/jpg;base64,' + product.image}}" class="card-img-top" width="200px" height="250px">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">Price: ${{ product.price }}</p>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <nav aria-label="Page navigation">
+      <ul class="pagination">
+        <li>
+          <select class="select form-select" [(ngModel)]="selectedOption" (change)="onOptionSelected()">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+          </select>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <a class="page-link" href="#" (click)="goToPage(1)">First</a>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <a class="page-link" href="#" (click)="goToPage(currentPage - 1)">Previous</a>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === totalPages">
+          <a class="page-link" href="#" (click)="goToPage(currentPage + 1)">Next</a>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === totalPages">
+          <a class="page-link" href="#" (click)="goToPage(totalPages)">Last</a>
+        </li>
+      </ul>
+    </nav>
+
+</div>

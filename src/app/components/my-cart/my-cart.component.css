@@ -1,0 +1,28 @@
+.order-button{
+    margin-top: 20px;
+}
+.number-input{
+    margin-right: 20px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+@media (max-width: 768px) {
+  .line {
+    border-top: 2px solid black;
+  }
+}
+
+@media (max-width: 576px) {
+  .line {
+    border-top: 1px dashed black;
+  }
+}

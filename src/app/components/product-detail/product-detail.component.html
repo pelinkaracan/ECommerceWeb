@@ -1,0 +1,16 @@
+<div class="container">
+  <button type="button" class="back-button btn btn-outline-secondary" (click)="goBack()"> 
+    <i class="bi bi-arrow-left"></i>
+  </button>
+  <div class="card">
+    <div class="card-body">
+      <img src="{{'data:image/jpg;base64,' + product.image}}" class="object-fit-sm-contain border rounded" >
+      <h5 class="card-title">{{product.name}}</h5>
+      <p class="card-text">{{currencySymbol}}{{product.price}}</p>
+    </div>
+  </div>
+  <div class="d-flex justify-content-end">
+    <button type="button" class="cart-button btn btn-outline-secondary" (click)="addToCart()"> 
+     {{cartButtonText}} </button>
+  </div>
+</div>
