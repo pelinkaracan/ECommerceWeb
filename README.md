@@ -1,27 +1,31 @@
-# ECommerceWeb
+## FRONTEND PART
+ ### Requirements
+Before begin, make sure you have the following prerequisites installed:
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.0.
+- Node.js and npm (Node Package Manager)
+- Visual Studio Code
+- Setup
+### How can you open ECommerce Pages?
+1. Open VsCode and go to File and open “ECommerceWeb” in the folder I sent you.
 
-## Development server
+![image](https://github.com/pelinkaracan/ECommerceWeb/assets/11795893/243f798c-9552-4dfe-9ddc-2d14a9663bb0)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+2. Open new terminal and write “npm install -g @angular/cli@15.0.0”
 
-## Code scaffolding
+![image](https://github.com/pelinkaracan/ECommerceWeb/assets/11795893/31948972-3d54-4ed8-944d-93bc74b4edab)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+![image](https://github.com/pelinkaracan/ECommerceWeb/assets/11795893/5a9f9b48-5354-47ae-9912-9c88d3c641b8)
 
-## Build
+3. ` `Write “npm install” command.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+![image](https://github.com/pelinkaracan/ECommerceWeb/assets/11795893/cbf11eb3-2e20-48a5-b3a0-07a8344afa53)
 
-## Running unit tests
+4. Write “ng serve” command.
+5. Open your browser and open <http://localhost:4200/>
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+You can see the web side;
 
-## Running end-to-end tests
+![image](https://github.com/pelinkaracan/ECommerceWeb/assets/11795893/53af4513-95c7-421c-beb0-14db76b0ec23)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
