@@ -6,6 +6,9 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { MyCartComponent } from './components/my-cart/my-cart.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 
+/**
+ * It defines routes
+ */
 const routes: Routes = [
   { path: '', component: ProductListComponent },
   { path: 'login', component: LoginPageComponent },

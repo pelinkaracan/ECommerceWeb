@@ -10,15 +10,31 @@ import { SharedService } from 'src/app/services/shared.service';
   styleUrls: ['./login-page.component.css']
 })
 export class LoginPageComponent implements OnInit {
+  /**
+   * It keeps Email
+   */
   email: string = '';
+  /**
+   * It keeps Password
+   */
   password: string = '';
-  constructor(public activeModal: NgbActiveModal, private authService: AuthService, 
-    private router :Router, private sharedService:SharedService) { 
+
+  /**
+   * Creates an instance of login page component.
+   * @param activeModal 
+   * @param authService 
+   * @param router 
+   * @param sharedService 
+   */
+  constructor(public activeModal: NgbActiveModal, private authService: AuthService,
+    private router: Router, private sharedService: SharedService) {
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
+  /**
+   * It log in a user to the web site
+   */
   login() {
     this.authService.login(this.email, this.password).subscribe(result => {
       if (result === true) {

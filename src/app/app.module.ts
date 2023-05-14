@@ -10,13 +10,13 @@ import { ComponentModule } from './components/component.module';
 import { CartService } from './services/cart.service';
 import { ConfigService } from './services/config.service';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
-import { JwtHelperService, JWT_OPTIONS,JwtModule } from '@auth0/angular-jwt';
+import { JwtHelperService, JWT_OPTIONS, JwtModule } from '@auth0/angular-jwt';
 
 
 @NgModule({
-  declarations: [			
+  declarations: [
     AppComponent
-   ],
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -30,14 +30,15 @@ import { JwtHelperService, JWT_OPTIONS,JwtModule } from '@auth0/angular-jwt';
           return localStorage.getItem('access_token');
         }
       }
-      })
+    })
   ],
-  providers: [CartService,JwtHelperService,
+  providers: [CartService, JwtHelperService,
     {
       provide: APP_INITIALIZER,
-      useFactory :() => {
+      useFactory: () => {
+        // It initialize config information before the application runs
         const configService = inject(ConfigService)
-        return () =>  new Promise((resolve) => {
+        return () => new Promise((resolve) => {
           const configs = require('../../config.json');
           configService.endPoint = configs.endpoint;
           resolve(true);
@@ -53,6 +54,6 @@ import { JwtHelperService, JWT_OPTIONS,JwtModule } from '@auth0/angular-jwt';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
-  
+export class AppModule {
+
 }

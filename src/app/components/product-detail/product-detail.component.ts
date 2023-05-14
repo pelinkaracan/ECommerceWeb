@@ -13,41 +13,74 @@ import { ConfigService } from 'src/app/services/config.service';
 })
 export class ProductDetailComponent implements OnInit {
 
-  product:Product=new Product();
-  currencySymbol :string =''
+  /**
+   * It keeps detail of Product
+   */
+  product: Product = new Product();
+
+  /**
+   * It keeps currency symbol
+   */
+  currencySymbol: string = '';
+
+  /**
+   * It keeps a text of add to cart button
+   */
   cartButtonText = "";
 
+
+  /**
+   * Creates an instance of product detail component.
+   * @param route 
+   * @param location 
+   * @param cartService 
+   * @param router 
+   * @param configService 
+   */
   constructor(private route: ActivatedRoute, private location: Location, private cartService: CartService,
     private router: Router, private configService: ConfigService) {
-      this.currencySymbol =  this.configService.getCurrencySymbol();
-     }
-
-  ngOnInit() {
-    const queryParams=this.route.snapshot.paramMap.get('product') ?? '';
-    this.product = JSON.parse(queryParams);
-    this.cartButtonText =`${this.currencySymbol} ${this.product.price} Add To Cart `
-   
+    this.currencySymbol = this.configService.getCurrencySymbol();
   }
 
+
+  /**
+   * on init
+   */
+  ngOnInit() {
+    // It gets product from parameters of route
+    const queryParams = this.route.snapshot.paramMap.get('product') ?? '';
+    this.product = JSON.parse(queryParams);
+    this.cartButtonText = `${this.currencySymbol} ${this.product.price} Add To Cart `;
+  }
+
+
+  /**
+   * Go previous page
+   */
   goBack() {
     this.location.back();
   }
 
-  addToCart(){
+  /**
+   * Adds product to cart
+   */
+  addToCart() {
     const cartItems = this.cartService.getCartItems();
     const items = cartItems.filter(e => e.product.id === this.product.id);
-    if(items.length > 0)
-    {
-      items[0].quantity ++;
+    if (items.length > 0) {
+      items[0].quantity++;
     }
-    else{
-        this.createCartItem();
+    else {
+      this.createCartItem();
     }
     this.router.navigate(['/cart']);
   }
 
-  private createCartItem(){
-    const cartItem:CartItem =new CartItem();
+  /**
+   * Creates cart item
+   */
+  private createCartItem() {
+    const cartItem: CartItem = new CartItem();
     cartItem.product = this.product;
     cartItem.quantity = 1;
     this.cartService.addToCart(cartItem);

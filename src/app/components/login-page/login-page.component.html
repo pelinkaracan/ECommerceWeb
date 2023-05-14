@@ -1,10 +1,9 @@
-
 <div class="modal-dialog" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-aria-hidden="true">
+  aria-hidden="true">
   <div class="modal-content">
     <div class="modal-header text-center">
       <h4 class="modal-title w-100 font-weight-bold">Sign in</h4>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="activeModal.close()" >
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="activeModal.close()">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
@@ -16,7 +15,8 @@ aria-hidden="true">
 
       <div class="md-form mb-4">
         <i class="fas fa-lock prefix grey-text"></i>
-        <input type="password" id="defaultForm-pass" class="form-control validate" placeholder="Password" [(ngModel)]="password">
+        <input type="password" id="defaultForm-pass" class="form-control validate" placeholder="Password"
+          [(ngModel)]="password">
       </div>
 
     </div>
@@ -25,19 +25,3 @@ aria-hidden="true">
     </div>
   </div>
 </div>
-  <!-- <div class="modal-dialog" role="">
-    <div class="modal-header">
-      <h5 class="modal-title">Login</h5>
-    </div>
-    <div class="modal-body">
-      <form class="login-form">
-        <input type="text" class="form-control" placeholder="Email" [(ngModel)]="email">
-        <br>
-        <input type="password" class="form-control" placeholder="Password" [(ngModel)]="password">
-      </form>
-    </div>
-    <div class="modal-footer" >
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      <button type="submit" class="btn btn-primary" (click)="login()">Login</button>
-    </div>
-  </div> -->

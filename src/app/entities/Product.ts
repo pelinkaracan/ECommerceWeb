@@ -1,3 +1,7 @@
+
+/**
+ * It keeps Product model
+ */
 export class Product {
     id: string = '';
     image: string = '';

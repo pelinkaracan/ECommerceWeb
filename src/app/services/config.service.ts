@@ -2,21 +2,27 @@ import { getCurrencySymbol, getLocaleCurrencyCode } from '@angular/common';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn :"any"
+  providedIn: "any"
 })
 export class ConfigService {
 
-  endPoint :string ='';
+
+  /**
+   * It sets from module to keep end point 
+   */
+  endPoint: string = '';
   constructor() { }
 
-  ngOnInit(){
-   
-  }
+  ngOnInit() { }
 
-  getCurrencySymbol()  {
+  /**
+   * Gets currency symbol
+   * @returns  
+   */
+  getCurrencySymbol() {
     const userLocale = navigator.language;
     const currencyCode = getLocaleCurrencyCode(userLocale) ?? '';
-    return getCurrencySymbol(currencyCode,'narrow', userLocale);
+    return getCurrencySymbol(currencyCode, 'narrow', userLocale);
   }
 
 }

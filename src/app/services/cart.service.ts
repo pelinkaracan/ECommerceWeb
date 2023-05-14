@@ -6,23 +6,38 @@ import { CartItem } from '../entities/CartItem';
 })
 export class CartService {
 
-constructor() { }
+  constructor() { }
   cartItems: CartItem[] = [];
 
+  /**
+   * Adds product to cart
+   * @param cartItem 
+   */
   addToCart(cartItem: CartItem) {
     this.cartItems.push(cartItem);
   }
 
+  /**
+   * Gets cart items
+   * @returns cart items 
+   */
   getCartItems(): CartItem[] {
     return this.cartItems;
   }
 
-  removeFromCart(cartItem:CartItem){
+  /**
+   * Removes product from cart
+   * @param cartItem 
+   */
+  removeFromCart(cartItem: CartItem) {
     const index = this.cartItems.indexOf(cartItem);
     this.cartItems.splice(index, 1);
   }
 
-  emptyCart(){
+  /**
+   * Emptys cart
+   */
+  emptyCart() {
     this.cartItems = [];
   }
 }

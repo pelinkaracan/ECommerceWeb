@@ -4,7 +4,7 @@
 <div class="modal-body">
   <p>{{ message }}</p>
 </div>
-<div class="modal-footer" >
-  <button  type="button" class="btn btn-primary" [hidden]="isOrder" (click)="activeModal.close('CANCEL')">Cancel</button>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" [hidden]="isOrder" (click)="activeModal.close('CANCEL')">Cancel</button>
   <button type="button" class="btn btn-primary" (click)="activeModal.close('OK')">Yes</button>
 </div>

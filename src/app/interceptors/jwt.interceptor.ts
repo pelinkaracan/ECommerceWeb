@@ -7,6 +7,12 @@ import { AuthService } from '../services/auth.service';
 export class JwtInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) { }
 
+  /**
+   * It uses to add bearer token to header of http requests
+   * @param request 
+   * @param next 
+   * @returns intercept 
+   */
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = localStorage.getItem('token');
     if (token && !this.authService.jwtHelper.isTokenExpired(token)) {
