@@ -57,7 +57,7 @@ export class MyCartComponent implements OnInit {
   calculateTotalValues() {
     this.totalValues = { totalPrice: 0, totalTax: 0, totalPriceWithTax: 0 };
     for (const item of this.cartItems) {
-      this.totalValues.totalTax = item.product.price * item.quantity * 0.18;
+      this.totalValues.totalTax += item.product.price * item.quantity * 0.18;
       this.totalValues.totalPrice += item.product.price * item.quantity;
     }
     this.totalValues.totalPriceWithTax = this.totalValues.totalPrice + this.totalValues.totalTax;
@@ -166,7 +166,7 @@ export class MyCartComponent implements OnInit {
   private askQuestionTouser(item: CartItem) {
     const modalRef = this.modalService.open(MessageModalComponent);
     modalRef.componentInstance.title = 'Remove Product';
-    modalRef.componentInstance.message = `Do you want this product:${item.product.name} from your cart`;
+    modalRef.componentInstance.message = `Do you want to remove this product:(${item.product.name})?`;
     modalRef.componentInstance.isOrder = false;
     modalRef.result.then((result) => {
       // Handle the modal result
@@ -175,6 +175,7 @@ export class MyCartComponent implements OnInit {
       }
       else if (result === 'CANCEL') {
         item.quantity++;
+        this.calculateTotalValues();
       }
     }).catch((error) => {
       // Handle any error that occurs
