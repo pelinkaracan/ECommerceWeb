@@ -1,0 +1,14 @@
+.modal-dialog {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: auto;
+    min-height: 50%;
+    padding: 10px;
+  }
+  @media (max-width: 767px) {
+    .modal-dialog {
+      min-height: calc(100vh - 20px);
+    }
+  }
+  

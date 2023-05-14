@@ -4,11 +4,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ComponentModule } from './components/component.module';
 import { CartService } from './services/cart.service';
 import { ConfigService } from './services/config.service';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { JwtHelperService, JWT_OPTIONS,JwtModule } from '@auth0/angular-jwt';
 
 
 @NgModule({
@@ -21,9 +23,16 @@ import { ConfigService } from './services/config.service';
     FormsModule,
     HttpClientModule,
     PaginationModule.forRoot(),
-    ComponentModule
+    ComponentModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('access_token');
+        }
+      }
+      })
   ],
-  providers: [CartService,
+  providers: [CartService,JwtHelperService,
     {
       provide: APP_INITIALIZER,
       useFactory :() => {
@@ -34,6 +43,11 @@ import { ConfigService } from './services/config.service';
           resolve(true);
         });
       },
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
       multi: true
     }
   ],

@@ -8,6 +8,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MessageModalComponent } from '../message-modal/message-modal.component';
 import { Router } from '@angular/router';
 import { ConfigService } from 'src/app/services/config.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { LoginPageComponent } from '../login-page/login-page.component';
 
 @Component({
   selector: 'app-my-cart',
@@ -21,7 +23,8 @@ export class MyCartComponent implements OnInit {
   endPoint: string ='';
   currencySymbol: string;
   constructor(private location: Location, private cartService: CartService, private http: HttpClient,
-    private modalService: NgbModal, private router: Router, private configService: ConfigService) { 
+    private modalService: NgbModal, private router: Router, private configService: ConfigService,
+    private authService: AuthService) { 
       this.endPoint =  this.configService.endPoint;
       this.currencySymbol =  this.configService.getCurrencySymbol();
     }
@@ -49,35 +52,53 @@ export class MyCartComponent implements OnInit {
     const url = `${this.endPoint}/order`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const data: Order = new Order();
-    data.userId = '645a23178d0a14499d404d91';
-    for (const item of this.cartItems) {
-      const detail: OrderDetail = new OrderDetail();
-      detail.productId = item.product.id;
-      detail.quantity = item.quantity;
-      data.items.push(detail);
+    const user:any = this.authService.getLoggedInUser();
+    if(this.authService.isLoggedIn() && this.authService.getLoggedInUser() !== null){
+      data.userId = user.Id;
+      for (const item of this.cartItems) {
+        const detail: OrderDetail = new OrderDetail();
+        detail.productId = item.product.id;
+        detail.quantity = item.quantity;
+        data.items.push(detail);
+      }
+      this.http.post(url, data, { headers }).subscribe(
+        response => {
+          const result :any  = response;
+          const modalRef = this.modalService.open(MessageModalComponent);
+          modalRef.componentInstance.title = 'Information';
+          modalRef.componentInstance.message = `Your Order :${result.id.substring(0, 10)} is created successfully.`;
+          modalRef.componentInstance.isOrder = true;
+          modalRef.result.then((result) => {
+            // Handle the modal result
+            if (result === 'OK') {
+              this.router.navigate(['']);
+              this.cartService.emptyCart();
+            }
+          }).catch((error) => {
+            // Handle any error that occurs
+            console.log(error);
+          });
+        },
+        error => {
+          console.error('An error occurred:', error);
+        }
+      );
     }
-    this.http.post(url, data, { headers }).subscribe(
-      response => {
-        const result :any  = response;
-        const modalRef = this.modalService.open(MessageModalComponent);
-        modalRef.componentInstance.title = 'My Message';
-        modalRef.componentInstance.message = `Your Order :${result.id.substring(0, 10)} is created successfully.`;
-        modalRef.componentInstance.isOrder = true;
+    else{
+      const modalRef = this.modalService.open(MessageModalComponent);
+        modalRef.componentInstance.title = 'Information';
+        modalRef.componentInstance.message = `Please be login.`;
+        modalRef.componentInstance.isOrder = false;
         modalRef.result.then((result) => {
           // Handle the modal result
           if (result === 'OK') {
-            this.router.navigate(['']);
-            this.cartService.emptyCart();
+            const modalRef = this.modalService.open(LoginPageComponent);
           }
         }).catch((error) => {
           // Handle any error that occurs
           console.log(error);
         });
-      },
-      error => {
-        console.error('An error occurred:', error);
-      }
-    );
+    }
   }
 
   decrement(item: CartItem) {

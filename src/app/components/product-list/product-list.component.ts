@@ -38,14 +38,12 @@ export class ProductListComponent implements OnInit {
   }
 
   getData() {
-    debugger;
     // let urlX = this.configService.getConfig();
     let url = `${this.endPoint}/products?page=${this.currentPage}&pageSize=${this.pageSize}`;
     if (this.filter !== '') {
       url = `${this.endPoint}/products?page=${this.currentPage}&pageSize=${this.pageSize}&filter=${this.filter}`;
     }
     this.http.get<any>(url).subscribe(response => {
-      debugger;
       this.products = response.items;
       this.products.forEach((product) => {
         let imageUrl = `${this.endPoint}/products/${product.id}/image`;
